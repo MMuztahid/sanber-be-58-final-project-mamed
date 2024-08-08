@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-import { encrypt } from "../utils/encryption";
-import { SECRET } from "../utils/env";
+import { encrypt } from "@/utils/encryption";
+import { SECRET } from "@/utils/env";
 
 import mail from "@/utils/mail";
 

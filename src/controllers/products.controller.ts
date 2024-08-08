@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import ProductsModel from "../models/products.model";
+import ProductsModel from "@/models/products.model";
 import * as Yup from 'yup';
 
 const createValidationSchema = Yup.object().shape({

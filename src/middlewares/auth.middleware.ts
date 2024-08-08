@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
-import { SECRET } from "../utils/env";
-import { IReqUser } from "../utils/interfaces";
+import { SECRET } from "@/utils/env";
+import { IReqUser } from "@/utils/interfaces";
 
 export default (req: Request, res: Response, next: NextFunction) => {
   const token = req.headers.authorization;

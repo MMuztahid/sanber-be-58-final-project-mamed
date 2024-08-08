@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import OrderModel from "../models/order.model";
-import ProductsModel from "../models/products.model";
+import ProductsModel from "@/models/products.model";
 import * as Yup from 'yup';
-import { IReqUser } from "../utils/interfaces";
+import { IReqUser } from "@/utils/interfaces";
 
 const createValidationOrderSchema = Yup.object().shape({
     grandTotal: Yup.number().required(),

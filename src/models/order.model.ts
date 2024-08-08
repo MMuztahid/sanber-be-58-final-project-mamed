@@ -1,8 +1,6 @@
 import mongoose from "mongoose";
-import mail from "../utils/mail";
-import UserModel from "./user.model";
-import { request } from "http";
-import { IReqUser } from "../utils/interfaces";
+import mail from "@/utils/mail";
+import UserModel from "@/models/user.model";
 
 const Schema = mongoose.Schema;
 
