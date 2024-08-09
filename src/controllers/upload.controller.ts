@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { toDataURI } from "@/utils/encode";
-import { handleUpload } from "@/utils/cloudinary";
+import { toDataURI } from "../utils/encode";
+import { handleUpload } from "../utils/cloudinary";
 
 export default {
   async single(req: Request, res: Response) {

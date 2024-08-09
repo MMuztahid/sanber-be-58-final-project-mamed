@@ -1,19 +1,17 @@
 import { Request, Response } from "express";
 import OrderModel from "../models/order.model";
-import ProductsModel from "@/models/products.model";
+import ProductsModel from "../models/products.model";
 import * as Yup from 'yup';
-import { IReqUser } from "@/utils/interfaces";
+import { IReqUser } from "../utils/interfaces";
 
 const createValidationOrderSchema = Yup.object().shape({
-    grandTotal: Yup.number().required(),
     orderItems: Yup.array().of(Yup.object().shape({
         name: Yup.string().required(),
         productId: Yup.string().required(),
         price: Yup.number().required(),
         quantity: Yup.number().required().min(1).max(5).required(),
     })).required(),
-    createdBy: Yup.string().required(),
-    status: Yup.string().required(),
+    statusOrder: Yup.string().required(),
   });
 
   interface IPaginationQuery {
@@ -25,8 +23,9 @@ const createValidationOrderSchema = Yup.object().shape({
 export default {
     async create(req: Request, res: Response) {
         try {
-            const { grandTotal, orderItems, createdBy, status } = req.body;
-            await createValidationOrderSchema.validate(req.body);
+            const { orderItems, statusOrder } = req.body;
+            const userId = (req as IReqUser).user.id;
+            const pending = "pending";
             //pre
             for (const item of orderItems) {
                 const product = await ProductsModel.findById(item.productId);
@@ -36,7 +35,13 @@ export default {
                 item.name = product.name;
                 item.price = product.price;
             }
-            const result = await OrderModel.create(req.body);
+            const result = await OrderModel.create({ 
+              grandTotal: orderItems.reduce((total: any, item: any) => total + item.price * item.quantity, 0),
+              orderItems,
+              statusOrder: statusOrder,
+              createdBy: userId,
+             });
+             await createValidationOrderSchema.validate(req.body);
             res.status(201).json({
             data: result,
             message: "Success create order",

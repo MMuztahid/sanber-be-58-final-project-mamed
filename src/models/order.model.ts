@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-import mail from "@/utils/mail";
-import UserModel from "@/models/user.model";
+import mail from "../utils/mail";
+import UserModel from "../models/user.model";
 
 const Schema = mongoose.Schema;
 
@@ -35,9 +35,10 @@ const OrderSchema = new Schema(
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
     },
-    status: {
+    statusOrder: {
         type: String,
         enum: ["pending", "completed", "cancelled"],
+        default: "pending",
 
     }
   },

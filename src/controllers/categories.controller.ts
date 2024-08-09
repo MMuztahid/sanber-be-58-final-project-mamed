@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import CategoriesModel from "@/models/categories.model";
+import CategoriesModel from "../models/categories.model";
 
 export default {
   async create(req: Request, res: Response) {
